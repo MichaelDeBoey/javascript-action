@@ -101,7 +101,7 @@ There are a few things to keep in mind when writing your action code:
   ```
 
   For more information about the GitHub Actions toolkit, see the
-  [documentation](https://github.com/actions/toolkit/blob/master/README.md).
+  [documentation](https://github.com/actions/toolkit/blob/main/README.md).
 
 So, what are you waiting for? Go ahead and start customizing your action!
 
@@ -119,14 +119,40 @@ So, what are you waiting for? Go ahead and start customizing your action!
    npm run all
    ```
 
-   > [!WARNING]
-   >
    > This step is important! It will run [`ncc`](https://github.com/vercel/ncc)
    > to build the final JavaScript action code with all dependencies included.
    > If you do not run this step, your action will not work correctly when it is
    > used in a workflow. This step also includes the `--license` option for
    > `ncc`, which will create a license file for all of the production node
    > modules used in your project.
+
+1. (Optional) Test your action locally
+
+   The [`@github/local-action`](https://github.com/github/local-action) utility
+   can be used to test your action locally. It is a simple command-line tool
+   that "stubs" (or simulates) the GitHub Actions Toolkit. This way, you can run
+   your JavaScript action locally without having to commit and push your changes
+   to a repository.
+
+   The `local-action` utility can be run in the following ways:
+
+   - Visual Studio Code Debugger
+
+     Make sure to review and, if needed, update
+     [`.vscode/launch.json`](./.vscode/launch.json)
+
+   - Terminal/Command Prompt
+
+     ```bash
+     # npx local action <action-yaml-path> <entrypoint> <dotenv-file>
+     npx local-action . src/main.js .env
+     ```
+
+   You can provide a `.env` file to the `local-action` CLI to set environment
+   variables used by the GitHub Actions Toolkit. For example, setting inputs and
+   event payload data used by your action. For more information, see the example
+   file, [`.env.example`](./.env.example), and the
+   [GitHub Actions Documentation](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables).
 
 1. Commit your changes
 
@@ -147,7 +173,7 @@ So, what are you waiting for? Go ahead and start customizing your action!
 Your action is now published! :rocket:
 
 For information about versioning your action, see
-[Versioning](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
+[Versioning](https://github.com/actions/toolkit/blob/main/docs/action-versioning.md)
 in the GitHub Actions toolkit.
 
 ## Validate the Action
@@ -180,7 +206,7 @@ For example workflow runs, check out the
 
 After testing, you can create version tag(s) that developers can use to
 reference different stable versions of your action. For more information, see
-[Versioning](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
+[Versioning](https://github.com/actions/toolkit/blob/main/docs/action-versioning.md)
 in the GitHub Actions toolkit.
 
 To include the action in a workflow in another repository, you can use the
